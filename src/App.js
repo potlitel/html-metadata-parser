@@ -1,10 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+var Meta = require("html-metadata-parser");
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      {
+        Meta.parser(
+          "https://www.youtube.com/watch?v=GN2nFJ9Ku6Q",
+          function (err, result) {
+            console.log(result);
+          }
+        )
+        /* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,9 +25,16 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */
+      }
     </div>
   );
 }
+
+(async () => {
+  var result = await Meta.parser("https://www.youtube.com/watch?v=GN2nFJ9Ku6Q");
+
+  console.log(JSON.stringify(result, null, 3));
+})();
 
 export default App;
